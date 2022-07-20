@@ -1,0 +1,18 @@
+{
+  "name": "voicerecorder",
+  "version": "0.1.0",
+  "description": "Tali AI sample voice recorder app",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Amirehsan Davoodi",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^19.0.8"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AmirDavoodi/voiceRecorder.git"
+  }
+}
