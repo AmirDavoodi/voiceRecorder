@@ -1,5 +1,6 @@
 // Main process
-const {app, BrowserWindow} = require('electron');
+const {app, BrowserWindow, Notification} = require('electron');
+const path = require('path');
 
 function createWindow() {
     // Browser Window <- Renderer Process
@@ -8,7 +9,9 @@ function createWindow() {
         height: 800,
         backgroundColor: "white",
         webPreferences:{
-            nodeIntegration: true
+            nodeIntegration: true,
+            contextIsolation: false,
+            enableRemoteModule: true,
         }
     });
 
@@ -16,7 +19,18 @@ function createWindow() {
     win.webContents.openDevTools();
 }
 
-app.whenReady().then(createWindow);
+app.whenReady()
+    .then(() => {
+        createWindow();
+        // const notification = new Notification({
+        //     title: 'Hello World',
+        //     body: 'My test message'
+        // })
+        // notification.show();
+        const parsed = path.parse('/home/user/dir/file.txt')
+        console.log(parsed.base);
+        console.log(parsed.ext);
+    });
 
 // Do not close the application on MAC OS by closing the window
 app.on('window-all-closed', () => {
