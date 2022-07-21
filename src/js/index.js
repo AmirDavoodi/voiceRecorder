@@ -1,5 +1,6 @@
-import { React } from "react";
-import { ReactDOM } from "react-dom";
+import React from "react";
+import { createRoot } from "react-dom/client";
 
-ReactDOM
-    .render(<h1>I am React App!</h1>, document.getElementById('voiceRecorder'))
+const container = document.getElementById('voiceRecorder');
+const root = createRoot(container); 
+root.render(<h1>I am React App!</h1>)
