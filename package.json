@@ -14,5 +14,9 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/AmirDavoodi/voiceRecorder.git"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   }
 }

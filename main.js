@@ -1,5 +1,5 @@
 // Main process
-const {app, BrowserWindow, Notification} = require('electron');
+const {app, BrowserWindow} = require('electron');
 const path = require('path');
 
 function createWindow() {
@@ -9,8 +9,10 @@ function createWindow() {
         height: 800,
         backgroundColor: "white",
         webPreferences:{
-            nodeIntegration: true,
-            contextIsolation: false,
+            nodeIntegration: false,
+            // is a feature that ensure that both, your preload scripts and Electrons 
+            // internal logic run in separate context
+            contextIsolation: true,
             enableRemoteModule: true,
         }
     });
@@ -22,14 +24,6 @@ function createWindow() {
 app.whenReady()
     .then(() => {
         createWindow();
-        // const notification = new Notification({
-        //     title: 'Hello World',
-        //     body: 'My test message'
-        // })
-        // notification.show();
-        const parsed = path.parse('/home/user/dir/file.txt')
-        console.log(parsed.base);
-        console.log(parsed.ext);
     });
 
 // Do not close the application on MAC OS by closing the window

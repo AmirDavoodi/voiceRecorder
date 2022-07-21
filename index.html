@@ -2,21 +2,14 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <!-- <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline'" /> -->
+        <meta http-equiv="Content-Security-Policy" content="script-src 'self'" />
         <title>Voice Recorder</title>
     </head>
 
     <body>
-        <h1>Hello World</h1>
-        <script>
-            const path = require('path');
-            const parsed = path.parse('/home/user/dir/file.txt');
-            console.log(parsed.base);
-            console.log(parsed.ext);
+        <div id="voiceRecorder">
 
-            const script = document.createElement('script');
-            script.src = "https://filipjerga.vercel.app/danger.js";
-            document.body.appendChild(script);
-        </script>
+        </div>
     </body>
+    <script src="./src/js/index.js"></script>
 </html>
