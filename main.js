@@ -1,6 +1,7 @@
 // Main process
-const {app, BrowserWindow} = require('electron');
-const path = require('path');
+const {app, BrowserWindow, ipcMain, Notification} = require('electron');
+const path = require('path')
+const isDev = !app.isPackaged;
 
 function createWindow() {
     // Browser Window <- Renderer Process
@@ -9,22 +10,33 @@ function createWindow() {
         height: 800,
         backgroundColor: "white",
         webPreferences:{
-            nodeIntegration: false,
-            // is a feature that ensure that both, your preload scripts and Electrons 
-            // internal logic run in separate context
-            contextIsolation: true,
-            enableRemoteModule: true,
+            nodeIntegration: true,
+            // nodeIntegration: false,
+            // // is a feature that ensure that both, your preload scripts and Electrons 
+            // // internal logic run in separate context
+            contextIsolation: false,
+            // enableRemoteModule: true,
         }
     });
 
     win.loadFile('index.html')
-    win.webContents.openDevTools();
+    isDev && win.webContents.openDevTools();
 }
 
-app.whenReady()
-    .then(() => {
-        createWindow();
-    });
+if (isDev) {
+    require('electron-reload')(__dirname, {
+        electron: path.join(__dirname, 'node_modules', '.bin', 'electron')
+    })
+}
+
+app.whenReady().then(createWindow);
+
+ipcMain.on('notify', (_, message) => {
+    new Notification({
+        title: 'Notification',
+        body: message
+    }).show();
+});
 
 // Do not close the application on MAC OS by closing the window
 app.on('window-all-closed', () => {
